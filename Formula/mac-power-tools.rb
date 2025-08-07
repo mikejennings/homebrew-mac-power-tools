@@ -13,6 +13,16 @@ class MacPowerTools < Formula
     # Install scripts directory
     libexec.install "scripts"
     
+    # Install completions
+    if File.exist?("completions")
+      libexec.install "completions"
+    end
+    
+    # Install completion installer
+    if File.exist?("install-completions.sh")
+      libexec.install "install-completions.sh"
+    end
+    
     # Update the script to use the correct paths
     inreplace bin/"mac" do |s|
       s.gsub! /^SCRIPT_DIR=.*$/, "SCRIPT_DIR=\"#{libexec}\""
@@ -22,6 +32,16 @@ class MacPowerTools < Formula
     chmod 0755, bin/"mac"
     Dir["#{libexec}/scripts/*.sh"].each do |script|
       chmod 0755, script
+    end
+    chmod 0755, "#{libexec}/install-completions.sh" if File.exist?("#{libexec}/install-completions.sh")
+    
+    # Install completions automatically
+    if File.exist?("#{libexec}/completions")
+      # Install zsh completion
+      zsh_completion.install "completions/_mac"
+      
+      # Install bash completion  
+      bash_completion.install "completions/mac-completion.bash" => "mac"
     end
     
     # Install documentation
@@ -39,9 +59,15 @@ class MacPowerTools < Formula
         mac info              Show system information
         mac maintenance       Open maintenance menu
       
+      Tab completion has been automatically installed for zsh and bash.
+      Restart your terminal or run:
+        # For zsh: compinit
+        # For bash: source $(brew --prefix)/etc/profile.d/bash_completion.sh
+      
       Optional dependencies for full functionality:
         mas                   For Mac App Store updates (brew install mas)
         terminal-notifier     For notifications (brew install terminal-notifier)
+        bash-completion       For bash tab completion (brew install bash-completion)
       
       For more information:
         https://github.com/mikejennings/mac-power-tools
