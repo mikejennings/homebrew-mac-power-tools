@@ -36,7 +36,7 @@ class MacPowerTools < Formula
     chmod 0755, "#{libexec}/install-completions.sh" if File.exist?("#{libexec}/install-completions.sh")
     
     # Install completions automatically
-    if File.exist?("#{libexec}/completions")
+    if File.exist?("completions")
       # Install zsh completion
       zsh_completion.install "completions/_mac"
       
