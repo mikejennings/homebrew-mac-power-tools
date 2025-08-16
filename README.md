@@ -33,7 +33,12 @@ mac maintenance       # Open maintenance menu
 - **System Updates**: Update macOS, Homebrew, Mac App Store, npm, Ruby gems, and Python packages
 - **System Information**: Monitor CPU, memory, disk, network, and battery status
 - **Maintenance Tools**: Clean caches, empty trash, manage large files, DNS flush, and more
-- **Power Management**: Sleep, restart, shutdown commands with safety prompts
+- **CleanMyMac Alternative**: Complete app uninstaller, duplicate finder, system cleaner, memory optimizer
+- **App Migration**: Migrate Mac App Store and manually downloaded apps to Homebrew
+- **Power Management**: Keep awake, sleep, restart, shutdown commands with safety features
+- **Privacy & Security**: Security audit, browser data cleaner, exposed secrets scanner
+- **Dotfiles Management**: iCloud sync for configuration files and app preferences
+- **Downloads Management**: Automatic sorting and organization of Downloads folder
 
 ## Updating
 
@@ -79,4 +84,4 @@ Contributions are welcome! Please submit pull requests to the [main repository](
 ---
 
 **Homebrew Tap Maintained by**: Mike Jennings  
-**Mac Power Tools Version**: 1.0.0
+**Mac Power Tools Version**: 2.1.0
