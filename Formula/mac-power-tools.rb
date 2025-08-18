@@ -1,10 +1,10 @@
 class MacPowerTools < Formula
   desc "Powerful macOS system management CLI tool"
   homepage "https://github.com/mikejennings/mac-power-tools"
-  url "https://github.com/mikejennings/mac-power-tools/archive/refs/tags/v2.3.1.tar.gz"
-  sha256 "dcdf376c573704637c97339cdd8f54375bb500efbdc5eb50aa6b8bbc7c3ab8ed"
+  url "https://github.com/mikejennings/mac-power-tools/archive/refs/tags/v2.4.0.tar.gz"
+  sha256 "79f3bf7d31ccdcd7da23259da83fbef4edf6c65cca2ce8924fe3ecee40c835d1"
   license "MIT"
-  version "2.3.1"
+  version "2.4.0"
 
   def install
     # Install the main executable
@@ -58,6 +58,7 @@ class MacPowerTools < Formula
         mac update            Update all system packages
         mac info              Show system information
         mac maintenance       Open maintenance menu
+        mac battery health    Check battery health and cycles
       
       Tab completion has been automatically installed for zsh and bash.
       Restart your terminal or run:
