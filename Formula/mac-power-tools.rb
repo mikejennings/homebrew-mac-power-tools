@@ -1,17 +1,28 @@
 class MacPowerTools < Formula
-  desc "Powerful macOS system management CLI tool"
+  desc "Powerful macOS system management CLI tool with plugin architecture"
   homepage "https://github.com/mikejennings/mac-power-tools"
-  url "https://github.com/mikejennings/mac-power-tools/archive/refs/tags/v2.4.0.tar.gz"
-  sha256 "79f3bf7d31ccdcd7da23259da83fbef4edf6c65cca2ce8924fe3ecee40c835d1"
+  url "https://github.com/mikejennings/mac-power-tools/archive/refs/tags/v4.0.0.tar.gz"
+  sha256 "54a890e5f8c70ff1ce5322f3a2d03d0e8018dd50d6e3dcfe2a71e2982b9544b7"
   license "MIT"
-  version "2.4.0"
+  version "4.0.0"
 
   def install
     # Install the main executable
     bin.install "mac"
     
-    # Install scripts directory
-    libexec.install "scripts"
+    # Install the mac-plugin executable
+    bin.install "mac-plugin"
+    
+    # Install lib directory for plugin system
+    libexec.install "lib"
+    
+    # Install plugins directory
+    libexec.install "plugins"
+    
+    # Install scripts directory (if it still exists for compatibility)
+    if File.exist?("scripts")
+      libexec.install "scripts"
+    end
     
     # Install completions
     if File.exist?("completions")
@@ -23,17 +34,30 @@ class MacPowerTools < Formula
       libexec.install "install-completions.sh"
     end
     
-    # Update the script to use the correct paths
+    # Update the scripts to use the correct paths
     inreplace bin/"mac" do |s|
       s.gsub! /^SCRIPT_DIR=.*$/, "SCRIPT_DIR=\"#{libexec}\""
+      s.gsub! /^MAC_POWER_TOOLS_HOME=.*$/, "MAC_POWER_TOOLS_HOME=\"#{libexec}\""
+    end
+    
+    inreplace bin/"mac-plugin" do |s|
+      s.gsub! /^SCRIPT_DIR=.*$/, "SCRIPT_DIR=\"#{libexec}\""
+      s.gsub! /^MAC_POWER_TOOLS_HOME=.*$/, "MAC_POWER_TOOLS_HOME=\"#{libexec}\""
     end
     
     # Make all scripts executable
     chmod 0755, bin/"mac"
-    Dir["#{libexec}/scripts/*.sh"].each do |script|
+    chmod 0755, bin/"mac-plugin"
+    
+    # Make plugin scripts executable
+    Dir["#{libexec}/plugins/available/*/main.sh"].each do |script|
       chmod 0755, script
     end
-    chmod 0755, "#{libexec}/install-completions.sh" if File.exist?("#{libexec}/install-completions.sh")
+    
+    # Make lib scripts executable
+    Dir["#{libexec}/lib/*.sh"].each do |script|
+      chmod 0755, script
+    end
     
     # Install completions automatically
     if File.exist?("completions")
@@ -47,18 +71,30 @@ class MacPowerTools < Formula
     # Install documentation
     doc.install "README.md"
     doc.install "LICENSE"
+    doc.install "PLUGIN_SPECIFICATION.md" if File.exist?("PLUGIN_SPECIFICATION.md")
   end
 
   def caveats
     <<~EOS
-      Mac Power Tools has been installed!
+      Mac Power Tools v4.0.0 has been installed!
       
-      Usage:
+      🎉 NEW: Plugin-based architecture for modular functionality
+      
+      Core Commands:
         mac help              Show all available commands
+        mac plugin list       List all available plugins
+        mac plugin enable     Enable a plugin
+        mac plugin disable    Disable a plugin
+        mac plugin install    Install a plugin from GitHub
+        mac plugin update     Update plugins
+      
+      Popular Commands:
         mac update            Update all system packages
         mac info              Show system information
         mac maintenance       Open maintenance menu
         mac battery health    Check battery health and cycles
+        mac uninstall         Complete app uninstaller
+        mac duplicates        Find duplicate files
       
       Tab completion has been automatically installed for zsh and bash.
       Restart your terminal or run:
@@ -69,6 +105,7 @@ class MacPowerTools < Formula
         mas                   For Mac App Store updates (brew install mas)
         terminal-notifier     For notifications (brew install terminal-notifier)
         bash-completion       For bash tab completion (brew install bash-completion)
+        fzf                   For interactive command selection (brew install fzf)
       
       For more information:
         https://github.com/mikejennings/mac-power-tools
@@ -81,5 +118,8 @@ class MacPowerTools < Formula
     
     # Test help command
     assert_match "COMMANDS", shell_output("#{bin}/mac help")
+    
+    # Test plugin system
+    assert_match "Available Plugins", shell_output("#{bin}/mac plugin list")
   end
 end
