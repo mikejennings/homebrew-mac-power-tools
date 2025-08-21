@@ -10,8 +10,10 @@ class MacPowerTools < Formula
     # Install the main executable
     bin.install "mac"
     
-    # Install the mac-plugin executable
-    bin.install "mac-plugin"
+    # Install the mac-plugin executable if it exists
+    if File.exist?("mac-plugin")
+      bin.install "mac-plugin"
+    end
     
     # Install lib directory for plugin system
     libexec.install "lib"
@@ -51,7 +53,9 @@ class MacPowerTools < Formula
     
     # Make all scripts executable
     chmod 0755, bin/"mac"
-    chmod 0755, bin/"mac-plugin"
+    if File.exist?(bin/"mac-plugin")
+      chmod 0755, bin/"mac-plugin"
+    end
     
     # Make plugin scripts executable
     Dir["#{libexec}/plugins/available/*/main.sh"].each do |script|
