@@ -37,12 +37,16 @@ class MacPowerTools < Formula
     # Update the scripts to use the correct paths
     inreplace bin/"mac" do |s|
       s.gsub! /^SCRIPT_DIR=.*$/, "SCRIPT_DIR=\"#{libexec}\""
-      s.gsub! /^MAC_POWER_TOOLS_HOME=.*$/, "MAC_POWER_TOOLS_HOME=\"#{libexec}\""
+      s.gsub! /^export MAC_POWER_TOOLS_HOME=.*$/, "export MAC_POWER_TOOLS_HOME=\"#{libexec}\""
+      s.gsub! /^MAC_HOME_DIR=.*$/, "MAC_HOME_DIR=\"#{libexec}\""
     end
     
-    inreplace bin/"mac-plugin" do |s|
-      s.gsub! /^SCRIPT_DIR=.*$/, "SCRIPT_DIR=\"#{libexec}\""
-      s.gsub! /^MAC_POWER_TOOLS_HOME=.*$/, "MAC_POWER_TOOLS_HOME=\"#{libexec}\""
+    if File.exist?(bin/"mac-plugin")
+      inreplace bin/"mac-plugin" do |s|
+        s.gsub! /^SCRIPT_DIR=.*$/, "SCRIPT_DIR=\"#{libexec}\""
+        s.gsub! /^export MAC_POWER_TOOLS_HOME=.*$/, "export MAC_POWER_TOOLS_HOME=\"#{libexec}\""
+        s.gsub! /^MAC_HOME_DIR=.*$/, "MAC_HOME_DIR=\"#{libexec}\""
+      end
     end
     
     # Make all scripts executable
