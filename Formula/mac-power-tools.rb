@@ -1,10 +1,10 @@
 class MacPowerTools < Formula
   desc "Powerful macOS system management CLI tool with plugin architecture"
   homepage "https://github.com/mikejennings/mac-power-tools"
-  url "https://github.com/mikejennings/mac-power-tools/archive/refs/tags/v4.0.2.tar.gz"
-  sha256 "cfc04c966f832ec7c71d7a11f945936ba07d04698c925786b5aac479d0727254"
+  url "https://github.com/mikejennings/mac-power-tools/archive/refs/tags/v4.0.3.tar.gz"
+  sha256 "8383eab0e911041d3278fb405474939eba1fa3ce56982dfe8f7ff7b0cdaf9601"
   license "MIT"
-  version "4.0.2"
+  version "4.0.3"
 
   def install
     # Install the main executable
