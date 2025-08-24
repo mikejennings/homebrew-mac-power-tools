@@ -2,6 +2,18 @@
 
 This is the official Homebrew tap for [Mac Power Tools](https://github.com/mikejennings/mac-power-tools), a powerful macOS system management CLI tool.
 
+## ⚠️ Disclaimer
+
+**This is a personal project maintained in my spare time.** While I use Mac Power Tools daily and strive to make it reliable and useful, please note:
+
+- **USE AT YOUR OWN RISK** - This software modifies system settings and files
+- **NO WARRANTY** - Provided "as-is" without any warranty of any kind
+- **PERSONAL PROJECT** - Not affiliated with Apple, Homebrew, or any other organization
+- **BACKUP YOUR DATA** - Always maintain backups before using system management tools
+- **TEST FIRST** - Consider testing commands in a safe environment before production use
+
+By installing and using this software, you acknowledge that you understand these risks and accept full responsibility for any consequences.
+
 ## Installation
 
 ### Quick Install (Recommended)
@@ -73,9 +85,11 @@ brew install terminal-notifier      # For system notifications
 - **Documentation**: [Mac Power Tools README](https://github.com/mikejennings/mac-power-tools#readme)
 - **Source Code**: [GitHub Repository](https://github.com/mikejennings/mac-power-tools)
 
-## License
+## License & Warranty
 
-Mac Power Tools is licensed under the MIT License. See the [LICENSE](https://github.com/mikejennings/mac-power-tools/blob/master/LICENSE) file for details.
+Mac Power Tools is licensed under the MIT License and is provided WITHOUT ANY WARRANTY. See the [LICENSE](https://github.com/mikejennings/mac-power-tools/blob/master/LICENSE) file for details.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED. Users assume all risks associated with its use.
 
 ## Contributing
 
@@ -84,4 +98,4 @@ Contributions are welcome! Please submit pull requests to the [main repository](
 ---
 
 **Homebrew Tap Maintained by**: Mike Jennings  
-**Mac Power Tools Version**: 2.1.0
+**Mac Power Tools Version**: 4.0.3
