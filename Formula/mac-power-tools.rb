@@ -1,10 +1,10 @@
 class MacPowerTools < Formula
   desc "Powerful macOS system management CLI tool with plugin architecture"
   homepage "https://github.com/mikejennings/mac-power-tools"
-  url "https://github.com/mikejennings/mac-power-tools/archive/refs/tags/v4.0.4.tar.gz"
-  sha256 "31c518123296f8913618a7ed4ce866f1f40f8d8b5b0be9993059618f44e9d744"
+  url "https://github.com/mikejennings/mac-power-tools/archive/refs/tags/v4.0.5.tar.gz"
+  sha256 "9aaf5edf6d41cd396275b033b6f7bd7aa293e50afdbdf7dbc3251a6d584da070"
   license "MIT"
-  version "4.0.4"
+  version "4.0.5"
 
   def install
     # Install the main executable
@@ -76,7 +76,10 @@ class MacPowerTools < Formula
 
   def caveats
     <<~EOS
-      Mac Power Tools v4.0.4 has been installed!
+      Mac Power Tools v4.0.5 has been installed!
+      
+      ⚠️  SECURITY UPDATE: This version patches critical vulnerabilities.
+      All users should upgrade from v4.0.4 immediately.
       
       🎉 NEW: Plugin-based architecture for modular functionality
       
